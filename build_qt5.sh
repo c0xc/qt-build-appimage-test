@@ -82,16 +82,12 @@ if [ -d "$BUILD_NAME" ]; then
     exit
 fi
 
-echo "TEST1($BUILD_NAME)"
 if [ -n "$SRC_FILE" ]; then
     (cd $SRC && tar xf "$SRC_FILE")
 fi
-echo "TEST2($BUILD_NAME)"
 
 SRC_DIR="/src/qt-everywhere-src-$VERSION"
-echo "TEST3($SRC_DIR)"
 test -d "$SRC_DIR"
-echo "TEST4($SRC_DIR)"
 
 mkdir $BUILD_NAME
 cd $BUILD_NAME || exit $?
@@ -166,6 +162,7 @@ fi
 
 EOF
 cp -f /etc/profile.d/qt.sh /root/.bashrc
+ls -l /etc/profile.d/qt.sh
 
 # TODO either make install or symlink
 # /usr/local/Qt-5.15.2/bin/lrelease
