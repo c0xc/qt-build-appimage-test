@@ -12,8 +12,10 @@ if [ -x "/etc/profile.d/qt.sh" ]; then
     echo "# found Qt env script, sourcing it..."
     source /etc/profile.d/qt.sh
 fi
-echo "QT: $QTDIR"
-which qmake
+echo "QTDIR: $QTDIR"
+if ! which $qmake >/dev/null 2>&1; then
+    echo "qmake missing!" >&2
+fi
 which qmake || exit $?
 
 if [ -n "$INPUT_RECIPE" ]; then
