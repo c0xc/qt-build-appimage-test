@@ -16,4 +16,5 @@ RUN \
     libxcursor-dev libxcomposite-dev libxdamage-dev libxrandr-dev libxtst-dev libxss-dev libdbus-1-dev libevent-dev libfontconfig1-dev libcap-dev libpulse-dev libudev-dev libpci-dev libnss3-dev libasound2-dev libegl1-mesa-dev gperf bison nodejs \
     wget libclang-dev vim
 
+COPY entrypoint.sh /
 ENTRYPOINT ["/entrypoint.sh"]
