@@ -142,7 +142,9 @@ $SRC_DIR/configure \
 
 echo "# make..."
 make -j"$MAKE_CORES" 2>&1 | tee >_MAKE.log
-if [ $? -ne 0 ]; then
+rc=$?
+cat _MAKE.log
+if [ $rc -ne 0 ]; then
     tail -n 50 >_ERROR
     exit 1
 fi

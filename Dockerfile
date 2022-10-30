@@ -38,9 +38,6 @@ COPY build_qt5.sh qt-everywhere-src-*.tar.* /var/tmp/
 RUN /var/tmp/build_qt5.sh
 
 # conditional CMD only if var/program defined?
-#CMD /var/tmp/build_qt5.sh
-
-# docker run -it --entrypoint bash qt-debian8
 
 #COPY entrypoint.sh /
 #ENTRYPOINT ["/entrypoint.sh"]
