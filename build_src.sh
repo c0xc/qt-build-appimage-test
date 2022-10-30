@@ -9,8 +9,8 @@ cd "$GITHUB_WORKSPACE" || exit $?
 echo "build pipeline - application build script..."
 ls -l /src /build
 #echo "QT: $QTDIR"
-if [ -x "/etc/profile.d/qt.sh" ]; then
-    echo "# found Qt env script, sourcing it..."
+if [ -f "/etc/profile.d/qt.sh" ]; then
+    echo "found Qt env script, sourcing it..."
     source /etc/profile.d/qt.sh
 fi
 echo "QTDIR: $QTDIR"
