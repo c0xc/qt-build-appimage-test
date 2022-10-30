@@ -23,7 +23,7 @@ function fetch_qt () {
     if [ ! -d "$SRC_DIR" ]; then
 
         if [ ! -f "qt-everywhere-src-$QT_VERSION.tar.xz" ]; then
-            wget https://download.qt.io/archive/qt/$QT_MAJOR.$QT_MINOR/$QT_VERSION/single/qt-everywhere-src-$QT_VERSION.tar.xz
+            wget --no-check-certificate https://download.qt.io/archive/qt/$QT_MAJOR.$QT_MINOR/$QT_VERSION/single/qt-everywhere-src-$QT_VERSION.tar.xz || return $?
         fi
 
         if [ ! -f "md5sums.txt" ]; then
@@ -67,6 +67,7 @@ for i in /var/tmp/qt*.tar.*; do
 done
 
 if [ -z "$VERSION" ]; then
+    echo "Qt not found, must download source tarball"
     fetch_qt
     VERSION=$QT_VERSION
 fi

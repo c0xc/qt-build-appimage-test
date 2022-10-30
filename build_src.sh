@@ -8,14 +8,12 @@ cd "$GITHUB_WORKSPACE" || exit $?
 
 echo "build pipeline - application build script..."
 echo "QT: $QTDIR"
-which qmake
 if [ -x "/etc/profile.d/qt.sh" ]; then
     echo "# found Qt env script, sourcing it..."
     source /etc/profile.d/qt.sh
 fi
+which qmake
 which qmake || exit $?
-true
-false
 
 if [ -n "$INPUT_RECIPE" ]; then
     source "$INPUT_RECIPE"
