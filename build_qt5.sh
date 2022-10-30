@@ -72,7 +72,7 @@ if [ -z "$VERSION" ]; then
     #fetch_qt || exit $?
     fetch_qt
     VERSION=$QT_VERSION
-    echo "Qt downloaded:"
+    echo "Qt $VERSION downloaded:"
     ls -l "$SRC"
 fi
 
@@ -82,12 +82,16 @@ if [ -d "$BUILD_NAME" ]; then
     exit
 fi
 
+echo "TEST1($BUILD_NAME)"
 if [ -n "$SRC_FILE" ]; then
     (cd $SRC && tar xf "$SRC_FILE")
 fi
+echo "TEST2($BUILD_NAME)"
 
 SRC_DIR="/src/qt-everywhere-src-$VERSION"
+echo "TEST3($SRC_DIR)"
 test -d "$SRC_DIR"
+echo "TEST4($SRC_DIR)"
 
 mkdir $BUILD_NAME
 cd $BUILD_NAME || exit $?
