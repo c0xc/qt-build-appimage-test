@@ -14,7 +14,7 @@ if [ -f "/etc/profile.d/qt.sh" ]; then
     source /etc/profile.d/qt.sh
 fi
 echo "QTDIR: $QTDIR"
-if ! which $qmake >/dev/null 2>&1; then
+if ! which qmake >/dev/null 2>&1; then
     echo "qmake missing!" >&2
 fi
 which qmake || exit $?
