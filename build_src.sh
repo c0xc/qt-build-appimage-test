@@ -23,15 +23,24 @@ if [ -n "$INPUT_RECIPE" ]; then
     source "$INPUT_RECIPE"
 fi
 
-linuxdeployqt=linuxdeployqt-continuous-x86_64.AppImage
-if ! which $linuxdeployqt >/dev/null 2>&1; then
-    # https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
-    (cd /usr/local/bin && wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/$linuxdeployqt && chmod +x $linuxdeployqt)
+linuxdeploy=linuxdeployqt-continuous-x86_64.AppImage # temporarily not working
+linuxdeploy=linuxdeploy-x86_64.AppImage
+if ! which $linuxdeploy >/dev/null 2>&1; then
+    echo "getting deploy tool: $linuxdeploy"
+    if [ -f "/var/tmp/$linuxdeploy" ]; then
+        ln -s /var/tmp/$linuxdeploy /usr/local/bin/
+    else
+        # https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
+        (cd /usr/local/bin && wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/$linuxdeploy && chmod +x $linuxdeploy)
+        # TODO both: ./linuxdeploy-x86_64.AppImage ./linuxdeploy-plugin-qt-x86_64.AppImage
+    fi
 fi
+which $linuxdeploy
 
 pro_file=$(find . -mindepth 1 -maxdepth 1 -name "*.pro")
 #if ls *.pro >/dev/null 2>&1; then
 if [ -n "$pro_file" ]; then
+    echo "BUILD - QMAKE: $pro_file"
 
     # IDEA build_workspace_qmake.sh
 

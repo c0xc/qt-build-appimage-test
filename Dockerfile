@@ -44,5 +44,5 @@ RUN /var/tmp/build_qt5.sh
 
 #COPY entrypoint.sh /
 #ENTRYPOINT ["/entrypoint.sh"]
-COPY build_src.sh /var/tmp/
+COPY build_src.sh *.AppImage /var/tmp/
 ENTRYPOINT ["/var/tmp/build_src.sh"]
