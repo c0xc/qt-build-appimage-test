@@ -9,7 +9,7 @@ inputs:
     required: false
   recipe:
     description: 'file with build parameters'
-    default: '.img_build_pipe.yml'
+    default: '.build_pipe_vars.sh'
 runs:
   using: 'docker'
   image: 'Dockerfile'
