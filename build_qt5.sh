@@ -16,7 +16,7 @@ mkdir -p "$BUILD_BASE"
 mkdir -p "$SRC"
 cd "$BUILD_BASE"
 
-function fetch_qt () {
+function fetch_qt {
     local SRC_DIR="/src/qt-everywhere-src-$QT_VERSION"
     pushd /src
 
@@ -29,7 +29,7 @@ function fetch_qt () {
         if [ ! -f "md5sums.txt" ]; then
             wget https://download.qt.io/archive/qt/$QT_MAJOR.$QT_MINOR/$QT_VERSION/single/md5sums.txt
         fi
-        md5sum --ignore-missing -c md5sums.txt
+        md5sum -c md5sums.txt
 
         # Extract tarball
         tar xf qt-everywhere-src-$QT_VERSION.tar.xz
@@ -68,7 +68,7 @@ done
 
 if [ -z "$VERSION" ]; then
     echo "Qt not found, must download source tarball"
-    fetch_qt
+    fetch_qt || exit $?
     VERSION=$QT_VERSION
 fi
 
@@ -83,6 +83,7 @@ if [ -n "$SRC_FILE" ]; then
 fi
 
 SRC_DIR="/src/qt-everywhere-src-$VERSION"
+test -d "$SRC_DIR"
 
 mkdir $BUILD_NAME
 cd $BUILD_NAME || exit $?
