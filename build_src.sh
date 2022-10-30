@@ -11,6 +11,7 @@ ls -l /src /build
 #echo "QT: $QTDIR"
 if [ -f "/etc/profile.d/qt.sh" ]; then
     echo "found Qt env script, sourcing it..."
+    cat /etc/profile.d/qt.sh
     source /etc/profile.d/qt.sh
 fi
 echo "QTDIR: $QTDIR"
