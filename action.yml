@@ -1,0 +1,17 @@
+name: 'qt-build-image-test-action'
+description: 'Runs Qt build container test'
+branding:
+  icon: 'command'
+  color: 'red'
+inputs:
+  command:
+    description: 'command to run'
+    required: false
+  recipe:
+    description: 'file with build parameters'
+    default: '.img_build_pipe.yml'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - recipe=${{ inputs.recipe }}
