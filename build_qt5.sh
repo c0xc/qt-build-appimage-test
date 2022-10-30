@@ -37,7 +37,7 @@ function fetch_qt () {
     popd
 }
 
-# DEP: OPENSSL
+# Qt 5.15 DEPENDENCY: OPENSSL
 
 if ! [ -d "/opt/openssl" ]; then
     # https://askubuntu.com/a/1127228
