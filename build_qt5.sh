@@ -69,7 +69,8 @@ done
 
 if [ -z "$VERSION" ]; then
     echo "Qt not found, must download source tarball"
-    fetch_qt || exit $?
+    #fetch_qt || exit $?
+    fetch_qt
     VERSION=$QT_VERSION
 fi
 
