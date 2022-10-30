@@ -72,6 +72,8 @@ if [ -z "$VERSION" ]; then
     #fetch_qt || exit $?
     fetch_qt
     VERSION=$QT_VERSION
+    echo "Qt downloaded:"
+    ls -l "$SRC"
 fi
 
 datetime=$(date '+%F-%T')
