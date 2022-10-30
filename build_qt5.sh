@@ -153,6 +153,7 @@ echo "make OK!"
 
 cat <<EOF >/etc/profile.d/qt.sh
 if [[ \$PATH != *qtbase* ]]; then
+    export QTDIR=$PWD/qtbase
     PATH=\$PATH:$PWD/qtbase/bin
     PATH=\$PATH:$PWD/qttools/bin
     export PATH
