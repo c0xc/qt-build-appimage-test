@@ -133,6 +133,7 @@ CONFIGURE_ARGS+=("-skip" "qtwebengine")
 
 # https://github.com/Screenly/screenly-ose/blob/master/webview/build_qt5.sh
 
+echo "# configure..."
 echo \
     $SRC_DIR/configure \
     "${CONFIGURE_ARGS[@]}" \
@@ -143,11 +144,13 @@ $SRC_DIR/configure \
     "${CONFIGURE_ARGS[@]}" \
     2>&1 | tee -a >_CONFIGURE.log
 
+echo "# make..."
 make -j"$MAKE_CORES" 2>&1 | tee >_MAKE.log
 if [ $? -ne 0 ]; then
     tail -n 50 >_ERROR
     exit 1
 fi
+echo "make OK!"
 
 # /src/qt-everywhere-src-5.15.2/qtimageformats/qtimageformats.pro
 # make module-qtscript ?
