@@ -48,6 +48,7 @@ if [ -n "$pro_file" ]; then
     qmake || exit $?
     #qmake CONFIG+=release PREFIX=/usr || exit $?
 
+    mkdir -p ./AppDir
     INSTALL_ROOT=./AppDir make install
     if [ -f "$icon_file" ]; then
         cp -v "$icon_file" AppDir/
