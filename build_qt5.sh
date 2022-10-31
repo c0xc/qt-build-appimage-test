@@ -132,8 +132,11 @@ CONFIGURE_ARGS+=("-skip" "qtwebengine")
 echo "# configure..."
 echo \
     $SRC_DIR/configure \
+    "${CONFIGURE_ARGS[@]}" >_CONFIGURE.log
+$SRC_DIR/configure \
+    -opensource -confirm-license \
     "${CONFIGURE_ARGS[@]}" \
-    | tee >_CONFIGURE.log
+    2>&1 | tee -a >_CONFIGURE.log
 rc=$?
 cat _CONFIGURE.log
 if [ $rc -ne 0 ]; then
@@ -141,11 +144,6 @@ if [ $rc -ne 0 ]; then
     tail -n 50 >_ERROR
     exit 1
 fi
-
-$SRC_DIR/configure \
-    -opensource -confirm-license \
-    "${CONFIGURE_ARGS[@]}" \
-    2>&1 | tee -a >_CONFIGURE.log
 
 echo "# make..."
 make -j"$MAKE_CORES" 2>&1 | tee >_MAKE.log
