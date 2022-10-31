@@ -151,11 +151,11 @@ fi
 echo "# make..."
 make -j"$MAKE_CORES" 2>&1 | tee >_MAKE.log
 rc=$?
-cat _MAKE.log
 if [ $rc -ne 0 ]; then
     tail -n 50 >_ERROR
     exit 1
 fi
+tail -n 50 _MAKE.log
 echo "make OK!"
 
 # /src/qt-everywhere-src-5.15.2/qtimageformats/qtimageformats.pro
