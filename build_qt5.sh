@@ -134,6 +134,13 @@ echo \
     $SRC_DIR/configure \
     "${CONFIGURE_ARGS[@]}" \
     | tee >_CONFIGURE.log
+rc=$?
+cat _CONFIGURE.log
+if [ $rc -ne 0 ]; then
+    echo "configure failed!" >&2
+    tail -n 50 >_ERROR
+    exit 1
+fi
 
 $SRC_DIR/configure \
     -opensource -confirm-license \
