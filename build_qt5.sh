@@ -107,11 +107,14 @@ CONFIGURE_ARGS+=("-qt-pcre")
 CONFIGURE_ARGS+=("-ssl")
 CONFIGURE_ARGS+=("-jasper")
 #CONFIGURE_ARGS+=("-xcb" "-xcb-xlib" "-bundled-xcb-input")
-CONFIGURE_ARGS+=("-qt-freetype" "-fontconfig")
+CONFIGURE_ARGS+=("-qt-freetype")
 CONFIGURE_ARGS+=("-qt-sqlite")
 CONFIGURE_ARGS+=("-sql-mysql")
 CONFIGURE_ARGS+=("-sql-psql")
 CONFIGURE_ARGS+=("-sql-odbc")
+
+# ERROR: Feature 'fontconfig' was enabled, but the pre-condition '!config.msvc && features.system-freetype && libs.fontconfig' failed.
+# CONFIGURE_ARGS+=("-qt-freetype" "-fontconfig")
 
 if [ -d "/opt/openssl" ]; then
     CONFIGURE_ARGS+=("-I" "/opt/openssl/include")
