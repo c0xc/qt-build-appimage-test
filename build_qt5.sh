@@ -183,5 +183,5 @@ ls -l /etc/profile.d/qt.sh
 #
 # mkdir -p /usr/local/Qt-5.15.2/bin/
 # ln -s /build/build-5.15.2/qttools/bin/lrelease /usr/local/Qt-5.15.2/bin/lrelease
-
+make install
 
