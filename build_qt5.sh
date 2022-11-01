@@ -115,13 +115,14 @@ CONFIGURE_ARGS+=("-sql-odbc")
 
 # ERROR: Feature 'fontconfig' was enabled, but the pre-condition '!config.msvc && features.system-freetype && libs.fontconfig' failed.
 # CONFIGURE_ARGS+=("-qt-freetype" "-fontconfig")
+# remedy: put font in search path relative to executable or include one
 
 if [ -d "/opt/openssl" ]; then
     CONFIGURE_ARGS+=("-I" "/opt/openssl/include")
     CONFIGURE_ARGS+=("-L" "/opt/openssl/lib")
 fi
 
-# 5.15:
+# Qt 5.15:
 # ERROR: Unknown command line option '-qt-tiff'.
 # ERROR: Unknown command line option '-qt-webp'.
 # ERROR: Unknown command line option '-mng'.
@@ -129,8 +130,6 @@ fi
 
 # ../../../../../../src/qt-everywhere-src-5.15.2/qtwebengine/src/3rdparty/chromium/third_party/webrtc/modules/desktop_capture/linux/screen_capturer_x11.h:101:3: error: 'XRRMonitorInfo' does not name a type
 CONFIGURE_ARGS+=("-skip" "qtwebengine")
-
-# https://github.com/Screenly/screenly-ose/blob/master/webview/build_qt5.sh
 
 echo "# configure..."
 echo \
@@ -163,12 +162,14 @@ echo "make OK!"
 
 cat <<EOF >/etc/profile.d/qt.sh
 if [[ \$PATH != *qtbase* ]]; then
-    export QTDIR=$PWD/qtbase
-    PATH=\$PATH:$PWD/qtbase/bin
-    PATH=\$PATH:$PWD/qttools/bin
+    QT5BASE=$PWD
+    export QTDIR=\$QT5BASE/qtbase
+    PATH=\$PATH:\$QTDIR/bin
+    PATH=\$PATH:\$QT5BASE/qttools/bin
     export PATH
     export QMAKE=\$(which qmake)
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/qtbase/lib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:\$QTDIR/lib
+    #QT_PLUGIN_PATH=\$QTDIR/plugins
 fi
 
 EOF

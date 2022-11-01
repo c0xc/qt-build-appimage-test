@@ -38,9 +38,5 @@ RUN \
 COPY build_qt5.sh qt-everywhere-src-*.tar.* /var/tmp/
 RUN /var/tmp/build_qt5.sh
 
-# conditional CMD only if var/program defined?
-
-#COPY entrypoint.sh /
-#ENTRYPOINT ["/entrypoint.sh"]
 COPY build_src.sh *.AppImage /var/tmp/
 ENTRYPOINT ["/var/tmp/build_src.sh"]

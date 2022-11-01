@@ -1,12 +1,9 @@
-name: 'qt-build-image-test-action'
-description: 'Runs Qt build container test'
+name: 'build-qt-on-debian8-pipeline-action'
+description: 'Creates a Qt build container on Debian 8 and builds the application.'
 branding:
   icon: 'command'
   color: 'red'
 inputs:
-  command:
-    description: 'command to run'
-    required: false
   recipe:
     description: 'file with build parameters'
     default: '.build_pipe_vars.sh'
