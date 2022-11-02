@@ -1,14 +1,6 @@
 FROM debian/eol:jessie
 
 RUN \
-    echo "DOCKERFILE TEST ($GITHUB_WORKSPACE)"; env
-RUN \
-    if [ "x$GITHUB_WORKSPACE" != "x" ]; then echo "workspace set1: $GITHUB_WORKSPACE"; fi
-ENV GITHUB_WORKSPACE $GITHUB_WORKSPACE
-RUN \
-    if [ "x$GITHUB_WORKSPACE" != "x" ]; then echo "workspace set1: $GITHUB_WORKSPACE"; fi
-
-RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
     printf "deb http://deb.debian.org/debian/ stretch main contrib non-free" >/etc/apt/sources.list.d/stretch.list && \
     echo "" >/etc/apt/preferences.d/backports && \
@@ -42,13 +34,8 @@ RUN \
     apt-get update && \
     apt-get install -y -t stretch build-essential perl python3 git g++
 
-# Execute remaining preparation steps
-RUN \
-    echo "DOCKERFILE TEST ($GITHUB_WORKSPACE)"; env
-COPY prepare_os.sh /var/tmp/
-RUN /var/tmp/prepare_os.sh
-
 # TODO get_qt5 - build or download depending on build_pipe env vars
+# TODO make this step optional
 COPY build_qt5.sh qt-everywhere-src-*.tar.* /var/tmp/
 RUN /var/tmp/build_qt5.sh
 

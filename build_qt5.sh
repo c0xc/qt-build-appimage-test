@@ -7,12 +7,12 @@
 
 # Pipeline build parameters:
 # not available here (called separately using RUN)
-# This script will create a custom Qt build.
-if [ -n "$NO_QT_BUILD" ]; then
-    echo "Qt build disabled"
-    exit
-fi
+# if [ -n "$NO_QT_BUILD" ]; then
+#     echo "Qt build disabled"
+#     exit
+# fi
 
+# This script will create a custom Qt build.
 # It will use the source tarball, if available: /var/tmp/qt*.tar.*
 # In that case, the Qt version will be derived from the filename.
 # If not found, the source tarball will be downloaded.
