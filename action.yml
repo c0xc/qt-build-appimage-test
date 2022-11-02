@@ -10,6 +10,5 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env_file: ${{ inputs.recipe }}
   args:
     - recipe=${{ inputs.recipe }}

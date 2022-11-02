@@ -35,6 +35,8 @@ RUN \
     apt-get install -y -t stretch build-essential perl python3 git g++
 
 # Execute remaining preparation steps
+RUN \
+    echo "DOCKERFILE TEST"; env
 COPY prepare_os.sh /var/tmp/
 RUN /var/tmp/prepare_os.sh
 
