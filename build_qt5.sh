@@ -34,8 +34,8 @@ else
     QT_MAJOR="5"
     QT_MINOR="15"
     QT_BUG_FIX="2"
+    QT_VERSION="$QT_MAJOR.$QT_MINOR.$QT_BUG_FIX"
 fi
-#QT_VERSION="$QT_MAJOR.$QT_MINOR.$QT_BUG_FIX"
 #DEBIAN_VERSION=$(lsb_release -cs)
 MAKE_CORES="$(expr $(nproc) + 2)"
 
