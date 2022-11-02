@@ -42,6 +42,11 @@ if ! which $linuxdeploy >/dev/null 2>&1; then
 fi
 which $linuxdeploy
 
+# Install other dependencies TODO separate script
+if [ -n "$INSTALL_DEBIAN" ]; then
+    apt-get install $INSTALL_DEBIAN || exit $?
+fi
+
 # Build application
 pro_file=$(find . -mindepth 1 -maxdepth 1 -name "*.pro")
 if [ -n "$pro_file" ]; then
