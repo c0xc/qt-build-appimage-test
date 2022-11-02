@@ -5,10 +5,8 @@
 #
 # GITHUB BUILD PIPELINE - QT BUILD SCRIPT
 
-# Pipeline build parameters
-if [ -n "$INPUT_RECIPE" ]; then
-    source "$INPUT_RECIPE"
-fi
+# Pipeline build parameters 
+# TODO not available
 
 # This script will create a custom Qt build.
 if [ -n "$NO_QT_BUILD" ]; then
