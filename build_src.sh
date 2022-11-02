@@ -47,7 +47,7 @@ if [ -n "$INSTALL_DEBIAN" ]; then
     apt-get install $INSTALL_DEBIAN || exit $?
 fi
 
-# Build application
+# Build application and copy it to AppDir/
 pro_file=$(find . -mindepth 1 -maxdepth 1 -name "*.pro")
 if [ -n "$pro_file" ]; then
     # qmake
@@ -79,6 +79,12 @@ if [ -n "$pro_file" ]; then
 else
     echo "NO BUILD FILE FOUND"
     exit 1
+fi
+
+# Add Qt plugins to be included in bundle - if using manual Qt build
+# Without these plugins, the application may fail to start!
+if [[ -n "$QTDIR" ]]; then
+    cp -var "$QTDIR/plugins/platforms/" AppDir/usr/bin/
 fi
 
 # Run linuxdeploy tool to create AppImage
