@@ -2,6 +2,11 @@ FROM debian/eol:jessie
 
 RUN \
     echo "DOCKERFILE TEST ($GITHUB_WORKSPACE)"; env
+RUN \
+    if [[ -n "$GITHUB_WORKSPACE" ]]; then echo -e "workspace set1: $GITHUB_WORKSPACE"; fi
+ENV GITHUB_WORKSPACE $GITHUB_WORKSPACE
+RUN \
+    if [[ -n "$GITHUB_WORKSPACE" ]]; then echo -e "workspace set2: $GITHUB_WORKSPACE"; fi
 
 RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
