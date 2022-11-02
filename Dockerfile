@@ -34,6 +34,10 @@ RUN \
     apt-get update && \
     apt-get install -y -t stretch build-essential perl python3 git g++
 
+# Execute remaining preparation steps
+COPY prepare_os.sh /var/tmp/
+RUN /var/tmp/prepare_os.sh
+
 # TODO get_qt5 - build or download depending on build_pipe env vars
 COPY build_qt5.sh qt-everywhere-src-*.tar.* /var/tmp/
 RUN /var/tmp/build_qt5.sh
