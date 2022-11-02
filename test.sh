@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "TESTTEST: ($GITHUB_WORKSPACE) ($INPUT_RECIPE)"
+
