@@ -10,3 +10,10 @@ if [ -n "$INPUT_RECIPE" ]; then
     source "$INPUT_RECIPE"
 fi
 
+# Install other system dependencies
+if [ -n "$INSTALL_DEBIAN" ]; then
+    echo "installing Debian packages: $INSTALL_DEBIAN"
+    apt-get install -y $INSTALL_DEBIAN || exit $?
+fi
+echo
+

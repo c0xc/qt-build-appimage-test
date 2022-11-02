@@ -65,13 +65,6 @@ echo -n "= "
 which $linuxdeploy
 echo
 
-# Install other dependencies TODO separate script
-if [ -n "$INSTALL_DEBIAN" ]; then
-    echo "installing Debian packages: $INSTALL_DEBIAN"
-    apt-get install $INSTALL_DEBIAN || exit $?
-fi
-echo
-
 # Build application and copy it to AppDir/
 pro_file=$(find . -mindepth 1 -maxdepth 1 -name "*.pro")
 if [ -n "$pro_file" ]; then
