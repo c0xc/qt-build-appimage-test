@@ -23,10 +23,19 @@ echo "BUILD PIPELINE - QT BUILD SCRIPT..."
 # because it's required by Qt.
 BUILD_BASE=/build
 SRC=/src
-QT_MAJOR="5"
-QT_MINOR="15"
-QT_BUG_FIX="2"
-QT_VERSION="$QT_MAJOR.$QT_MINOR.$QT_BUG_FIX"
+VERSION=$(echo "$QT_VERSION" | grep -Po '[5-6]\.[0-9]+\.[0-9]+')
+get_qt=
+if [ -n "$VERSION" ]; then
+    QT_MAJOR=$(echo "$VERSION" | cut -f1 -d'.')
+    QT_MINOR=$(echo "$VERSION" | cut -f2 -d'.')
+    QT_BUG_FIX=$(echo "$VERSION" | cut -f3 -d'.')
+    get_qt=yes
+else
+    QT_MAJOR="5"
+    QT_MINOR="15"
+    QT_BUG_FIX="2"
+fi
+#QT_VERSION="$QT_MAJOR.$QT_MINOR.$QT_BUG_FIX"
 #DEBIAN_VERSION=$(lsb_release -cs)
 MAKE_CORES="$(expr $(nproc) + 2)"
 
@@ -78,7 +87,6 @@ fi
 
 cd $BUILD_BASE
 
-VERSION=
 SRC_FILE=
 for i in /var/tmp/qt*.tar.*; do
     v=$(echo "$i" | grep -Po '5\.[0-9]+\.[0-9]+')

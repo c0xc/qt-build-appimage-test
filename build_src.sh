@@ -20,7 +20,7 @@ fi
 if [ -f "/var/tmp/NO_QT_BUILD" ]; then
     NO_QT_BUILD=1
 fi
-if [ -n "$NO_QT_BUILD" ]; then
+if [ -z "$NO_QT_BUILD" ]; then
     /var/tmp/build_qt5.sh
 fi
 
@@ -74,17 +74,17 @@ which $linuxdeploy
 echo
 
 # Install other system dependencies
-apt_packages=
-if [ -n "$INSTALL_DEBIAN" ]; then
-    apt_packages=$INSTALL_DEBIAN
-elif [ -n "$PREP_APT_INSTALL" ]; then
-    apt_packages=$PREP_APT_INSTALL
-fi
-if [ -n "$apt_packages" ]; then
-    echo "installing Debian packages: $INSTALL_DEBIAN"
-    apt-get install -y $INSTALL_DEBIAN || exit $?
-fi
-echo
+# apt_packages=
+# if [ -n "$INSTALL_DEBIAN" ]; then
+#     apt_packages=$INSTALL_DEBIAN
+# elif [ -n "$PREP_APT_INSTALL" ]; then
+#     apt_packages=$PREP_APT_INSTALL
+# fi
+# if [ -n "$apt_packages" ]; then
+#     echo "installing Debian packages: $INSTALL_DEBIAN"
+#     apt-get install -y $INSTALL_DEBIAN || exit $?
+# fi
+# echo
 
 # Build application and copy it to AppDir/
 pro_file=$(find . -mindepth 1 -maxdepth 1 -name "*.pro")
