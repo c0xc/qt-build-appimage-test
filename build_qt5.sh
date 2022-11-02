@@ -7,10 +7,10 @@
 
 # Pipeline build parameters:
 # not available here (called separately using RUN)
-# if [ -n "$NO_QT_BUILD" ]; then
-#     echo "Qt build disabled"
-#     exit
-# fi
+if [ -n "$NO_QT_BUILD" ]; then
+    echo "Qt build disabled"
+    exit
+fi
 
 echo "BUILD PIPELINE - QT BUILD SCRIPT..."
 # This script will create a custom Qt build.
@@ -96,6 +96,13 @@ if [ -z "$VERSION" ]; then
     ls -l "$SRC"
 fi
 
+VERSION_MAJOR=$(echo "$VERSION" | cut -f1 -d'.')
+VERSION_MINOR=$(echo "$VERSION" | cut -f2 -d'.')
+
+if [ -z "$VERSION" ]; then
+    echo "VERSION cannot be determined" >&2
+    exit 1
+fi
 datetime=$(date '+%F-%T')
 BUILD_NAME="build-$VERSION"
 if [ -d "$BUILD_NAME" ]; then
@@ -126,12 +133,17 @@ CONFIGURE_ARGS+=("-qt-harfbuzz")
 CONFIGURE_ARGS+=("-qt-pcre")
 CONFIGURE_ARGS+=("-ssl")
 CONFIGURE_ARGS+=("-jasper")
-#CONFIGURE_ARGS+=("-xcb" "-xcb-xlib" "-bundled-xcb-input")
 CONFIGURE_ARGS+=("-qt-freetype")
 CONFIGURE_ARGS+=("-qt-sqlite")
 CONFIGURE_ARGS+=("-sql-mysql")
 CONFIGURE_ARGS+=("-sql-psql")
 CONFIGURE_ARGS+=("-sql-odbc")
+
+# XCB
+# https://codereview.qt-project.org/c/qt/qtdoc/+/300877/3/doc/src/platforms/linux.qdoc
+if [[ "$VERSION_MAJOR" = 5 && "$VERSION_MINOR" -lt 15 ]]; then
+    CONFIGURE_ARGS+=("-xcb" "-xcb-xlib" "-bundled-xcb-input")
+fi
 
 # ERROR: Feature 'fontconfig' was enabled, but the pre-condition '!config.msvc && features.system-freetype && libs.fontconfig' failed.
 # CONFIGURE_ARGS+=("-qt-freetype" "-fontconfig")
@@ -151,7 +163,7 @@ fi
 # ../../../../../../src/qt-everywhere-src-5.15.2/qtwebengine/src/3rdparty/chromium/third_party/webrtc/modules/desktop_capture/linux/screen_capturer_x11.h:101:3: error: 'XRRMonitorInfo' does not name a type
 CONFIGURE_ARGS+=("-skip" "qtwebengine")
 
-echo "# configure..."
+echo "# CONFIGURE..."
 echo \
     $SRC_DIR/configure \
     "${CONFIGURE_ARGS[@]}" >_CONFIGURE.log
@@ -167,7 +179,7 @@ if [ $rc -ne 0 ]; then
     exit 1
 fi
 
-echo "# make..."
+echo "# MAKE..."
 make -j"$MAKE_CORES" 2>&1 | tee >_MAKE.log
 rc=$?
 if [ $rc -ne 0 ]; then
@@ -175,7 +187,7 @@ if [ $rc -ne 0 ]; then
     exit 1
 fi
 tail -n 50 _MAKE.log
-echo "make OK!"
+echo "MAKE OK!"
 
 # /src/qt-everywhere-src-5.15.2/qtimageformats/qtimageformats.pro
 # make module-qtscript ?
@@ -193,15 +205,18 @@ if [[ \$PATH != *qtbase* ]]; then
 fi
 
 EOF
-cp -f /etc/profile.d/qt.sh /root/.bashrc
 ls -l /etc/profile.d/qt.sh
+echo "source /etc/profile.d/qt.sh" >>/root/.bashrc
 
-# TODO either make install or symlink
+# TODO either make install or symlink Qt dirs ...
+# by default (not changing paths in any way), Qt will try to access:
 # /usr/local/Qt-5.15.2/bin/lrelease
-#root@1d337347363f:/tmp/CapacityTester# export QTDIR=/build/build-5.15.2/qtbase 
-#root@1d337347363f:/tmp/CapacityTester# export LD_LIBRARY_PATH=$QTDIR/lib
-#
-# mkdir -p /usr/local/Qt-5.15.2/bin/
-# ln -s /build/build-5.15.2/qttools/bin/lrelease /usr/local/Qt-5.15.2/bin/lrelease
+# either install Qt there:
 make install
+# or create a link there and make sure to set QTDIR and LD_LIBRARY_PATH
+# if ! which lrelease >/dev/null 2>&1; then
+if ! [[ -f "/usr/local/Qt-5.15.2/bin/lrelease" ]]; then
+    mkdir -p /usr/local/Qt-$VERSION/bin/
+    ln -s /build/build-$VERSION/qttools/bin/lrelease /usr/local/Qt-$VERSION/bin/
+fi
 

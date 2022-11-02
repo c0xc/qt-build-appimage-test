@@ -1,0 +1,11 @@
+FROM ubuntu:bionic
+
+RUN \
+    apt-get update && \
+    apt-get install -y build-dep qtbase5-dev
+
+
+
+# Run build scripts
+COPY build*.sh *.AppImage /var/tmp/
+ENTRYPOINT ["/var/tmp/build_src.sh"]

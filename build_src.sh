@@ -16,6 +16,14 @@ if [ -n "$INPUT_RECIPE" ]; then
     source "$INPUT_RECIPE"
 fi
 
+# Run Qt build, if configured
+if [ -f "/var/tmp/NO_QT_BUILD" ]; then
+    NO_QT_BUILD=1
+fi
+if [ -n "$NO_QT_BUILD" ]; then
+    /var/tmp/build_qt5.sh
+fi
+
 # Load Qt (custom Qt build if available, standard Qt installation otherwise)
 echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 ls -l /src /build
@@ -127,6 +135,9 @@ if (which $linuxdeploy && ls AppDir) >/dev/null 2>&1; then
         mkdir -p AppDir/usr/lib/fonts
         cp -v res/*.ttf AppDir/usr/lib/fonts/
     fi
+
+    # dlopen(): error loading libfuse.so.2
+    export APPIMAGE_EXTRACT_AND_RUN=1
 
     # Arguments
     args=()
