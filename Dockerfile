@@ -1,5 +1,5 @@
-ARG OS_NAME debian/eol
-ARG OS_RELEASE jessie
+ARG OS_NAME=debian/eol
+ARG OS_RELEASE=jessie
 FROM $OS_NAME:$OS_RELEASE
 #FROM debian/eol:jessie
 ARG OS_NAME
