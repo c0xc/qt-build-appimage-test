@@ -1,7 +1,5 @@
 FROM debian/eol:jessie
 
-COPY ../qt-everywhere-src-*.tar.* ../*.AppImage /var/tmp/
-
 RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
     printf "deb http://deb.debian.org/debian/ stretch main contrib non-free" >/etc/apt/sources.list.d/stretch.list && \
@@ -37,5 +35,7 @@ RUN \
     apt-get install -y -t stretch build-essential perl python3 git g++
 
 # Run build scripts
-COPY build*.sh qt-everywhere-src-*.tar.* *.AppImage /var/tmp/
+# qt-everywhere-src-*.tar.*
+# *.AppImage
+COPY build*.sh *.tar.* *.AppImage /var/tmp/
 ENTRYPOINT ["/var/tmp/build_src.sh"]

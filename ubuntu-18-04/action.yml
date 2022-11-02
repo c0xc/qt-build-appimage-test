@@ -9,6 +9,6 @@ inputs:
     default: '.build_pipe_vars.sh'
 runs:
   using: 'docker'
-  image: '../Dockerfile_ubuntu_18_04'
+  image: 'Dockerfile'
   args:
     - recipe=${{ inputs.recipe }}

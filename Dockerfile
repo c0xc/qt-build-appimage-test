@@ -1,4 +1,20 @@
-FROM debian/eol:jessie
+ARG OS_NAME debian/eol
+ARG OS_RELEASE jessie
+FROM $OS_NAME:$OS_RELEASE
+#FROM debian/eol:jessie
+ARG OS_NAME
+ENV OS_NAME $OS_NAME
+ARG OS_RELEASE
+ENV OS_RELEASE $OS_RELEASE
+
+ARG OS_NAME
+ENV OS_NAME $OS_NAME
+
+COPY prepare_os.sh /var/tmp/
+RUN /var/tmp/prepare_os.sh
+RUN false
+
+
 
 RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
