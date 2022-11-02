@@ -1,10 +1,5 @@
 FROM debian/eol:jessie
 
-ARG INPUT_RECIPE=""
-ENV ENV_INPUT_RECIPE=$INPUT_RECIPE
-COPY test.sh /var/tmp/
-RUN /var/tmp/test.sh
-
 RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
     printf "deb http://deb.debian.org/debian/ stretch main contrib non-free" >/etc/apt/sources.list.d/stretch.list && \

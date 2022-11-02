@@ -11,7 +11,6 @@
 #     echo "Qt build disabled"
 #     exit
 # fi
-echo "TEST: ($GITHUB_WORKSPACE) ($INPUT_RECIPE)"
 
 echo "BUILD PIPELINE - QT BUILD SCRIPT..."
 # This script will create a custom Qt build.
