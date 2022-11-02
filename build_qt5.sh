@@ -2,7 +2,27 @@
 
 # vim: tabstop=4 shiftwidth=4 softtabstop=4
 # -*- sh-basic-offset: 4 -*-
+#
+# GITHUB BUILD PIPELINE - QT BUILD SCRIPT
 
+# Pipeline build parameters
+if [ -n "$INPUT_RECIPE" ]; then
+    source "$INPUT_RECIPE"
+fi
+
+# This script will create a custom Qt build.
+if [ -n "$NO_QT_BUILD" ]; then
+    echo "Qt build disabled"
+    exit
+fi
+
+# It will use the source tarball, if available: /var/tmp/qt*.tar.*
+# In that case, the Qt version will be derived from the filename.
+# If not found, the source tarball will be downloaded.
+# In that case, the QT_VERSION variable will be used to determine what to get.
+# qt-everywhere-src-5.15.2.tar.xz is 238M in size
+# OpenSSL will also be (downloaded if missing and) built
+# because it's required by Qt.
 BUILD_BASE=/build
 SRC=/src
 QT_MAJOR="5"
@@ -43,7 +63,9 @@ function fetch_qt {
 if ! [ -d "/opt/openssl" ]; then
     # https://askubuntu.com/a/1127228
     cd /var/tmp
-    wget --no-check-certificate https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+    if ! [ -f "openssl-1.1.1b.tar.gz" ]; then
+        wget --no-check-certificate https://www.openssl.org/source/openssl-1.1.1b.tar.gz
+    fi
     mkdir /opt/openssl
     cd /opt/openssl
     tar xfvz /var/tmp/openssl-1.1.1b.tar.gz --directory /opt/openssl

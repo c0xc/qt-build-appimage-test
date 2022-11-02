@@ -1,6 +1,9 @@
 #!/bin/bash
 #
-# GITHUB BUILD PIPELINE - BUILD SCRIPT
+# vim: tabstop=4 shiftwidth=4 softtabstop=4
+# -*- sh-basic-offset: 4 -*-
+#
+# GITHUB BUILD PIPELINE - APPLICATION BUILD SCRIPT
 
 if [[ -z "$GITHUB_WORKSPACE" ]]; then
     echo "workspace directory missing" >&2
@@ -8,7 +11,7 @@ if [[ -z "$GITHUB_WORKSPACE" ]]; then
 fi
 cd "$GITHUB_WORKSPACE" || exit $?
 
-# Build parameters
+# Pipeline build parameters
 if [ -n "$INPUT_RECIPE" ]; then
     source "$INPUT_RECIPE"
 fi
