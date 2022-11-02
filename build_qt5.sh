@@ -5,9 +5,8 @@
 #
 # GITHUB BUILD PIPELINE - QT BUILD SCRIPT
 
-# Pipeline build parameters 
-# TODO not available
-
+# Pipeline build parameters:
+# not available here (called separately using RUN)
 # This script will create a custom Qt build.
 if [ -n "$NO_QT_BUILD" ]; then
     echo "Qt build disabled"

@@ -1,6 +1,9 @@
 FROM debian/eol:jessie
 
 RUN \
+    echo "DOCKERFILE TEST ($GITHUB_WORKSPACE)"; env
+
+RUN \
     printf "deb [check-valid-until=no] http://archive.debian.org/debian jessie-backports main contrib non-free" >/etc/apt/sources.list.d/backports.list && \
     printf "deb http://deb.debian.org/debian/ stretch main contrib non-free" >/etc/apt/sources.list.d/stretch.list && \
     echo "" >/etc/apt/preferences.d/backports && \
@@ -36,7 +39,7 @@ RUN \
 
 # Execute remaining preparation steps
 RUN \
-    echo "DOCKERFILE TEST"; env
+    echo "DOCKERFILE TEST ($GITHUB_WORKSPACE)"; env
 COPY prepare_os.sh /var/tmp/
 RUN /var/tmp/prepare_os.sh
 
