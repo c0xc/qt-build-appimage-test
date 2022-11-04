@@ -161,5 +161,8 @@ if (which $linuxdeploy && ls AppDir) >/dev/null 2>&1; then
     echo "linuxdeploy arguments: ${args[@]}"
     $linuxdeploy "${args[@]}"
 
+    echo "AppDir/:"
+    ls -lArthR AppDir
+
 fi
 
