@@ -166,3 +166,9 @@ if (which $linuxdeploy && ls AppDir) >/dev/null 2>&1; then
 
 fi
 
+# Create tarball for upload (to keep executable bit)
+if [ -z "$TAR_FILES" ]; then
+    TAR_FILES="bin/* *.AppImage"
+fi
+tar cvf build.tar $TAR_FILES
+
