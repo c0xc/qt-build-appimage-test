@@ -1,5 +1,5 @@
-name: 'build-qt-on-debian8-pipeline-action'
-description: 'Creates a Qt build container on Debian 8 and builds the application.'
+name: 'build-qt-pipeline-action'
+description: 'Creates a Qt build container and builds the application.'
 branding:
   icon: 'command'
   color: 'red'
@@ -13,10 +13,13 @@ inputs:
   os_release:
     description: ''
     default: '30'
+  no_qt_build:
+    description: ''
+    default: false
 runs:
   using: 'composite'
   steps:
-    - run: echo test ${{ inputs.os_name }} lalalala
+    - run: echo init build action on ${{ inputs.os_name }}/${{ inputs.os_release }}
       shell: bash
     - run: echo PLATT=${{ inputs.os_name }} >/tmp/ENV_OS_NAME
       shell: bash
@@ -30,6 +33,10 @@ runs:
       shell: bash
     - run: docker --version
       shell: bash
-    - run: cd ${{ github.action_path }} && docker build -t build-container --build-arg os_name=${{ inputs.os_name }} --build-arg os_release=${{ inputs.os_release }} .
+    - run: cd ${{ github.action_path }} && docker build -t build-container --build-arg os_name=${{ inputs.os_name }} --build-arg os_release=${{ inputs.os_release }} --build-arg no_qt_build=${{ inputs.no_qt_build }} .
       shell: bash
+    - run: cd ${{ github.action_path }} && docker run -t build-container -v ${{ github.workspace }}:/workspace 
+      shell: bash
+      env: |
+        GITHUB_WORKSPACE=${{ github.workspace }}
     #- uses: ./.github/actions/multibuild
