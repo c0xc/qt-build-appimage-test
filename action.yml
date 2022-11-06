@@ -9,7 +9,10 @@ inputs:
     default: '.build_pipe_vars.sh'
   os_name:
     description: ''
-    default: 'debian'
+    default: 'fedora'
+  os_release:
+    description: ''
+    default: '30'
 runs:
   using: 'composite'
   steps:
@@ -23,4 +26,6 @@ runs:
       shell: bash
     - run: docker --version
       shell: bash
-    - uses: ./.github/actions/multibuild
+    - run: cd ${{ github.action_path }} && docker build -t build-container --build-arg os_name=${{ inputs.os_name }} --build-arg os_release=${{ inputs.os_release }} .
+      shell: bash
+    #- uses: ./.github/actions/multibuild
