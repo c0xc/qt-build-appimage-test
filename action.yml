@@ -7,10 +7,14 @@ inputs:
   recipe:
     description: 'file with build parameters'
     default: '.build_pipe_vars.sh'
+  os_name:
+    description: ''
+    default: 'debian'
+  OS_NAME:
+    description: ''
+    default: 'DEBian'
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  build-args: |
-    OS_NAME=${{ inputs.os_name }}
   args:
     - recipe=${{ inputs.recipe }}
