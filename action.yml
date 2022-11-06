@@ -15,6 +15,6 @@ runs:
   steps:
     - run: echo test ${{ inputs.os_name }} lalalala
       shell: bash
-    - run: echo PLATT=${{ inputs.os_name }} >/ENV_OS_NAME
+    - run: echo PLATT=${{ inputs.os_name }} >/tmp/ENV_OS_NAME
       shell: bash
     - uses: ./.github/actions/multibuild
