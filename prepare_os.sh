@@ -9,6 +9,13 @@
 echo "BUILD PIPELINE - OS PREPARATION..."
 echo "OS: $OS_NAME:$OS_RELEASE"
 OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d'=')
+if [ -z "$OS_NAME"]; then
+    OS_NAME=$os_name
+fi
+if [ -z "$OS_NAME"]; then
+    OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
+    OS_NAME=$OS_ID
+fi
 
 # Install build dependencies if Qt source/tarball defined
 QT_DEV=
@@ -152,10 +159,13 @@ elif [ "$OS_NAME" = "fedora" ]; then
         yum install -y perl python3 git g++
         yum install -y qt5-qtbase
     fi
-fi
 
-OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
-echo "$OS_ID"
+else
+    OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
+    echo "$OS_ID:$OS_VERSION_ID"
+    echo "OS not supported!"
+    exit 1
+fi
 
 if (which apt-get && -n "$APT_INSTALL") >/dev/null 2>&1; then
     echo "Installing other dependencies: $APT_INSTALL"
