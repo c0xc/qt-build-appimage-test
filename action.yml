@@ -11,12 +11,14 @@ inputs:
     description: ''
     default: 'debian'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  env:
-    os_name: OSI
-  # https://dev.to/sethetter/custom-github-actions-with-docker-3ik3
-  # https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#runsargs
-  args:
-    - recipe=${{ inputs.recipe }}
-    - build-arg os_name=${{ inputs.os_name }}
+  using: 'composite'
+  steps:
+    - run: echo test ${{ inputs.os_name }} lalalala
+      shell: bash
+    - run: echo PLATT=${{ inputs.os_name }} >/ENV_OS_NAME
+      shell: bash
+    - using: 'docker'
+      image: 'Dockerfile'
+      args:
+        - recipe=${{ inputs.recipe }}
+        - build-arg os_name=${{ inputs.os_name }}
