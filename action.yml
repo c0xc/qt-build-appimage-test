@@ -15,3 +15,4 @@ runs:
   image: 'Dockerfile'
   args:
     - recipe=${{ inputs.recipe }}
+    - build-arg os_name=${{ inputs.os_name }}

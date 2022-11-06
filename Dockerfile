@@ -1,8 +1,12 @@
 #RUN echo "00test00 I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
 FROM debian/eol:jessie
 ARG OS_NAME
+ARG os_name
+ARG OS_RELEASE
+ARG os_release
 RUN echo "arg? OS_NAME = ${OS_NAME}"
 RUN echo "arg? os_name = ${os_name}"
+RUN echo "arg? OS_RELEASE = ${OS_RELEASE}/${os_release}"
 ARG TARGETPLATFORM
 ARG TARGETOS
 ARG BUILDOS
