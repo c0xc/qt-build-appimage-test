@@ -1,36 +1,44 @@
 #RUN echo "00test00 I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
-FROM debian/eol:jessie
-ARG OS_NAME
+#FROM debian/eol:jessie
+#ARG OS_NAME
+#ARG os_name
+#ARG OS_RELEASE
+#ARG os_release
+#ENV OS_NAME $OS_NAME
+#ENV os_name $os_name
+#RUN echo "arg? OS_NAME = ${OS_NAME}"
+#RUN echo "arg? os_name = ${os_name}"
+#RUN echo "arg? OS_RELEASE = ${OS_RELEASE}/${os_release}"
+#ARG TARGETPLATFORM
+#ARG TARGETARCH
+#ARG TARGETOS
+#ARG BUILDOS
+#ARG BUILDARCH
+#ARG BUILDVARIANT
+#ARG BUILDPLATFORM
+#RUN echo "I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
+#ENV TARGETPLATFORM $TARGETPLATFORM
+#ENV TARGETARCH $TARGETARCH
+#RUN echo "I'm buildinggg ? tp=$TARGETPLATFORM ta=$TARGETARCH"
+#RUN pwd; ls -la; mount; ls -laR /home
+## FROM debian/eol:jessie (default)
+##ARG OS_NAME=debian/eol
+#ARG OS_NAME
+##ARG OS_RELEASE=jessie
+#ARG OS_RELEASE
 ARG os_name
-ARG OS_RELEASE
-ARG os_release
-ENV OS_NAME $OS_NAME
 ENV os_name $os_name
-RUN echo "arg? OS_NAME = ${OS_NAME}"
-RUN echo "arg? os_name = ${os_name}"
-RUN echo "arg? OS_RELEASE = ${OS_RELEASE}/${os_release}"
-ARG TARGETPLATFORM
-ARG TARGETARCH
-ARG TARGETOS
-ARG BUILDOS
-ARG BUILDARCH
-ARG BUILDVARIANT
-ARG BUILDPLATFORM
-RUN echo "I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
-ENV TARGETPLATFORM $TARGETPLATFORM
-ENV TARGETARCH $TARGETARCH
-RUN echo "I'm buildinggg ? tp=$TARGETPLATFORM ta=$TARGETARCH"
-RUN pwd; ls -la; mount; ls -laR /home
-# FROM debian/eol:jessie (default)
-#ARG OS_NAME=debian/eol
-ARG OS_NAME
-#ARG OS_RELEASE=jessie
-ARG OS_RELEASE
+ARG os_release
+ENV os_release $os_release
 FROM ${os_name}:${os_release}
+RUN echo "arg1? os_name = ${os_name}"
+RUN echo "arg1? OS_RELEASE = ${OS_RELEASE}/${os_release}"
 ARG OS_NAME
 ENV OS_NAME $OS_NAME
 ARG OS_RELEASE
 ENV OS_RELEASE $OS_RELEASE
+RUN echo "arg2? os_name = ${os_name}"
+RUN echo "arg2? OS_RELEASE = ${OS_RELEASE}/${os_release}"
 
 # Get build args for preparation script
 ARG NO_QT_BUILD
