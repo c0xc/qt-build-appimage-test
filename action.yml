@@ -13,8 +13,8 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env: |
-    os_name=OSI
+  env:
+    os_name: OSI
   args:
     - recipe=${{ inputs.recipe }}
     - build-arg os_name=${{ inputs.os_name }}
