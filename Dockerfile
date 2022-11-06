@@ -1,6 +1,7 @@
 FROM debian/eol:jessie
 ARG OS_NAME
-RUN echo "arg osname = ${OS_NAME}"
+RUN echo "arg? OS_NAME = ${OS_NAME}"
+RUN echo "arg? os_name = ${os_name}"
 # FROM debian/eol:jessie (default)
 #ARG OS_NAME=debian/eol
 ARG OS_NAME
