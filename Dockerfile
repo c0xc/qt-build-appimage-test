@@ -20,7 +20,7 @@ RUN echo "I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDO
 ENV TARGETPLATFORM $TARGETPLATFORM
 ENV TARGETARCH $TARGETARCH
 RUN echo "I'm buildinggg ? tp=$TARGETPLATFORM ta=$TARGETARCH"
-RUN pwd; ls -la; ls -laR /home/runner/work
+RUN pwd; ls -la; mount; ls -laR /home
 # FROM debian/eol:jessie (default)
 #ARG OS_NAME=debian/eol
 ARG OS_NAME
