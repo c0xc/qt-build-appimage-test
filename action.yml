@@ -10,9 +10,6 @@ inputs:
   os_name:
     description: ''
     default: 'debian'
-  OS_NAME:
-    description: ''
-    default: 'DEBian'
 runs:
   using: 'docker'
   image: 'Dockerfile'
