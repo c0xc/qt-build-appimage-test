@@ -1,0 +1,19 @@
+name: 'build-qt-on-x-pipeline-action'
+description: 'Creates a Qt build container ...'
+branding:
+  icon: 'command'
+  color: 'red'
+inputs:
+  recipe:
+    description: 'file with build parameters'
+    default: '.build_pipe_vars.sh'
+  os_name:
+    description: ''
+    default: 'debian'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - recipe=${{ inputs.recipe }}
+    - build-arg os_name=${{ inputs.os_name }}
+

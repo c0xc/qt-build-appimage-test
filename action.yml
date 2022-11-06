@@ -17,8 +17,4 @@ runs:
       shell: bash
     - run: echo PLATT=${{ inputs.os_name }} >/ENV_OS_NAME
       shell: bash
-    - using: 'docker'
-      image: 'Dockerfile'
-      args:
-        - recipe=${{ inputs.recipe }}
-        - build-arg os_name=${{ inputs.os_name }}
+    - uses: ./.github/actions/multibuild
