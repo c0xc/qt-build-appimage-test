@@ -9,6 +9,7 @@ ENV os_name $os_name
 RUN echo "arg? OS_NAME = ${OS_NAME}"
 RUN echo "arg? os_name = ${os_name}"
 RUN echo "arg? OS_RELEASE = ${OS_RELEASE}/${os_release}"
+RUN pwd; ls -la; mount; ls -laR /home; cat /etc/os-release
 ARG TARGETPLATFORM
 ARG TARGETARCH
 ARG TARGETOS
