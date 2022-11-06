@@ -1,6 +1,6 @@
 FROM debian/eol:jessie
 ARG OS_NAME
-RUN echo arg osname = ${OS_NAME}
+RUN echo "arg osname = ${OS_NAME}"
 # FROM debian/eol:jessie (default)
 #ARG OS_NAME=debian/eol
 ARG OS_NAME
@@ -21,6 +21,8 @@ ARG APT_INSTALL
 ENV APT_INSTALL $APT_INSTALL
 ARG YUM_INSTALL
 ENV YUM_INSTALL $YUM_INSTALL
+
+RUN false
 
 # Qt tarball is copied first (optional)
 # If missing, it will be downloaded
