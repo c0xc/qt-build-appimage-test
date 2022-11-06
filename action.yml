@@ -24,7 +24,9 @@ runs:
       shell: bash
     - run: cp -v ${{ inputs.recipe }} ${{ github.action_path }}/
       shell: bash
-    - run: echo ${{ github.action_path }}; ls -la ${{ github.action_path }}
+    - run: echo action${{ github.action_path }}; ls -la ${{ github.action_path }}
+      shell: bash
+    - run: echo workspace ${{ github.workspace }}; ls -la ${{ github.workspace }}
       shell: bash
     - run: docker --version
       shell: bash
