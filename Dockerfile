@@ -1,7 +1,15 @@
+RUN echo "00test00 I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
 FROM debian/eol:jessie
 ARG OS_NAME
 RUN echo "arg? OS_NAME = ${OS_NAME}"
 RUN echo "arg? os_name = ${os_name}"
+ARG TARGETPLATFORM
+ARG TARGETOS
+ARG BUILDOS
+ARG BUILDARCH
+ARG BUILDVARIANT
+ARG BUILDPLATFORM
+RUN echo "I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
 # FROM debian/eol:jessie (default)
 #ARG OS_NAME=debian/eol
 ARG OS_NAME
