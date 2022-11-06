@@ -1,4 +1,4 @@
-RUN echo "00test00 I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
+#RUN echo "00test00 I'm building for target $TARGETPLATFORM on: p=$BUILDPLATFORM o=$BUILDOS a=$BUILDARCH v=$BUILDVARIANT"
 FROM debian/eol:jessie
 ARG OS_NAME
 RUN echo "arg? OS_NAME = ${OS_NAME}"
