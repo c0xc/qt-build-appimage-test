@@ -26,7 +26,7 @@ RUN pwd; ls -la; mount; ls -laR /home
 ARG OS_NAME
 #ARG OS_RELEASE=jessie
 ARG OS_RELEASE
-FROM ${OS_NAME}:${OS_RELEASE}
+FROM ${os_name}:${os_release}
 ARG OS_NAME
 ENV OS_NAME $OS_NAME
 ARG OS_RELEASE
