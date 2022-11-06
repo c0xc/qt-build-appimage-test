@@ -1,3 +1,6 @@
+FROM debian/eol:jessie
+ARG OS_NAME
+RUN echo arg osname = ${OS_NAME}
 # FROM debian/eol:jessie (default)
 #ARG OS_NAME=debian/eol
 ARG OS_NAME
