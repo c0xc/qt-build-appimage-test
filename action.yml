@@ -17,4 +17,8 @@ runs:
       shell: bash
     - run: echo PLATT=${{ inputs.os_name }} >/tmp/ENV_OS_NAME
       shell: bash
+    - run: pwd; ls -la; cat /etc/os-release
+      shell: bash
+    - run: docker --version
+      shell: bash
     - uses: ./.github/actions/multibuild
