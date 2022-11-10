@@ -15,7 +15,7 @@ OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d
 if [ -z "$OS_NAME"]; then
     OS_NAME=$os_name
 fi
-if [ -z "$OS_NAME"]; then
+if [ -z "$OS_NAME" ]; then
     OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
     OS_NAME=$OS_ID
 fi
