@@ -7,6 +7,9 @@
 
 # Pipeline build parameters are unavailable here
 echo "BUILD PIPELINE - OS PREPARATION..."
+if [ -z "$OS_NAME" ]; then
+    echo "error: OS_NAME not set"
+fi
 echo "OS: $OS_NAME:$OS_RELEASE"
 OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d'=')
 if [ -z "$OS_NAME"]; then
@@ -157,7 +160,7 @@ elif [ "$OS_NAME" = "fedora" ]; then
 
     else
         yum install -y perl python3 git g++
-        yum install -y qt5-qtbase
+        yum install -y qt5-qtbase qt5-linguist
     fi
 
 else

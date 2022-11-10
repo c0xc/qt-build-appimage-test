@@ -7,6 +7,9 @@
 
 # Pipeline build parameters:
 # not available here (called separately using RUN)
+if [ -f "/var/tmp/NO_QT_BUILD" ]; then
+    NO_QT_BUILD=1
+fi
 if [ -n "$NO_QT_BUILD" ]; then
     echo "Qt build disabled"
     exit
