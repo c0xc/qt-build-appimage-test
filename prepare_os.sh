@@ -7,14 +7,14 @@
 
 # Pipeline build parameters are unavailable here
 echo "BUILD PIPELINE - OS PREPARATION..."
-if [ -z "$OS_NAME" ]; then
-    echo "error: OS_NAME not set"
-fi
-echo "OS: $OS_NAME:$OS_RELEASE"
 OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d'=')
 if [ -z "$OS_NAME"]; then
     OS_NAME=$os_name
 fi
+if [ -z "$OS_NAME" ]; then
+    echo "error: OS_NAME not set"
+fi
+echo "OS: $OS_NAME:$OS_RELEASE"
 if [ -z "$OS_NAME" ]; then
     OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
     OS_NAME=$OS_ID
@@ -26,6 +26,8 @@ if [ -n "$QT_VERSION" ]; then
     QT_DEV=yes
 elif [ -f "/var/tmp/"qt-everywhere-src-*.tar.* ]; then
     QT_DEV=yes
+else
+    touch /var/tmp/NO_QT_BUILD
 fi
 if [ -n "$NO_QT_BUILD" ]; then
     QT_DEV=

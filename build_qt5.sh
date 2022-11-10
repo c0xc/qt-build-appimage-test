@@ -7,6 +7,7 @@
 
 # Pipeline build parameters:
 # not available here (called separately using RUN)
+ls -l /var/tmp/NO_QT_BUILD
 if [ -f "/var/tmp/NO_QT_BUILD" ]; then
     NO_QT_BUILD=1
 fi
