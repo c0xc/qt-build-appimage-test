@@ -37,6 +37,6 @@ runs:
       shell: bash
     - run: cd ${{ github.action_path }} && docker run -t build-container -v ${{ github.workspace }}:/workspace 
       shell: bash
-      env: 
-        GITHUB_WORKSPACE=${{ github.workspace }}
+      #env: 
+      #  GITHUB_WORKSPACE=${{ github.workspace }}
     #- uses: ./.github/actions/multibuild
