@@ -3,10 +3,10 @@ ARG os_release
 FROM ${os_name}:${os_release}
 RUN echo "arg1? os_name = ${os_name}"
 RUN echo "arg1? OS_RELEASE = ${OS_RELEASE}/${os_release}"
-ARG OS_NAME
-ENV OS_NAME $OS_NAME
-ARG OS_RELEASE
-ENV OS_RELEASE $OS_RELEASE
+ARG os_name
+ENV os_name $os_name
+ARG os_release
+ENV os_release $os_release
 RUN echo "arg2? os_name = ${os_name}"
 RUN echo "arg2? OS_RELEASE = ${OS_RELEASE}/${os_release}"
 
