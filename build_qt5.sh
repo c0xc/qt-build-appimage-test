@@ -4,10 +4,10 @@
 # -*- sh-basic-offset: 4 -*-
 #
 # GITHUB BUILD PIPELINE - QT BUILD SCRIPT
+echo "BUILD PIPELINE - QT BUILD SCRIPT..."
 
 # Pipeline build parameters:
 # not available here (called separately using RUN)
-ls -l /var/tmp/NO_QT_BUILD
 if [ -f "/var/tmp/NO_QT_BUILD" ]; then
     NO_QT_BUILD=1
 fi
@@ -16,8 +16,6 @@ if [ -n "$NO_QT_BUILD" ]; then
     exit
 fi
 
-echo "BUILD PIPELINE - QT BUILD SCRIPT..."
-cat /etc/os-release
 # This script will create a custom Qt build.
 # It will use the source tarball, if available: /var/tmp/qt*.tar.*
 # In that case, the Qt version will be derived from the filename.
