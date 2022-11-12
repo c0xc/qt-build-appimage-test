@@ -1,14 +1,16 @@
+# Import base OS as defined in workflow (or Debian 8)
+# uses: c0xc/github-build-qt-appimage-action@master
+# with:
+#   os_name: fedora
+#   os_release: 31
 ARG os_name
 ARG os_release
 FROM ${os_name}:${os_release}
-RUN echo "arg1? os_name = ${os_name}"
-RUN echo "arg1? OS_RELEASE = ${OS_RELEASE}/${os_release}"
+# Re-import args/vars because they are blank after FROM statement
 ARG os_name
 ENV os_name $os_name
 ARG os_release
 ENV os_release $os_release
-RUN echo "arg2? os_name = ${os_name}"
-RUN echo "arg2? OS_RELEASE = ${OS_RELEASE}/${os_release}"
 
 # Get build args for preparation script
 ARG no_qt_build
@@ -20,12 +22,13 @@ ENV APT_INSTALL $APT_INSTALL
 ARG YUM_INSTALL
 ENV YUM_INSTALL $YUM_INSTALL
 
-# Qt tarball is copied first (optional)
-# If missing, it will be downloaded
-COPY prepare_os.sh qt-everywhere-src-*.tar.* /var/tmp/
+# Prepare OS by installing build dependencies
+COPY prepare_os.sh /var/tmp/
 RUN /var/tmp/prepare_os.sh
 
 # Run build scripts
+# Qt tarball is copied first (optional)
+# If missing, it will be downloaded when building Qt
 COPY build*.sh qt-everywhere-src-*.tar.* *.AppImage /var/tmp/
 RUN /var/tmp/build_qt5.sh
 
