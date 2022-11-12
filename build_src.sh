@@ -4,7 +4,9 @@
 # -*- sh-basic-offset: 4 -*-
 #
 # GITHUB BUILD PIPELINE - APPLICATION BUILD SCRIPT
+echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
+env
 if [[ -z "$GITHUB_WORKSPACE" ]]; then
     echo "workspace directory not defined, skipping build" >&2
     exit 1
@@ -25,7 +27,6 @@ if [ -z "$NO_QT_BUILD" ]; then
 fi
 
 # Load Qt (custom Qt build if available, standard Qt installation otherwise)
-echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 ls -l /src /build
 if [ -f "/etc/profile.d/qt.sh" ]; then
     echo "found Qt env script, sourcing it..."
