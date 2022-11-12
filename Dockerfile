@@ -28,4 +28,8 @@ RUN /var/tmp/prepare_os.sh
 # Run build scripts
 COPY build*.sh qt-everywhere-src-*.tar.* *.AppImage /var/tmp/
 RUN /var/tmp/build_qt5.sh
+
+# Arguments, application build script
+ARG GITHUB_WORKSPACE
+ENV GITHUB_WORKSPACE $GITHUB_WORKSPACE
 ENTRYPOINT ["/var/tmp/build_src.sh"]
