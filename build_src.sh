@@ -6,9 +6,6 @@
 # GITHUB BUILD PIPELINE - APPLICATION BUILD SCRIPT
 echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
-env
-ls -la /
-mount
 if [[ -z "$workspace" ]]; then
     ls -la /workspace
     if [[ -d "/workspace" ]]; then
@@ -34,7 +31,6 @@ if [ -z "$NO_QT_BUILD" ]; then
 fi
 
 # Load Qt (custom Qt build if available, standard Qt installation otherwise)
-ls -l /src /build
 if [ -f "/etc/profile.d/qt.sh" ]; then
     echo "found Qt env script, sourcing it..."
     cat /etc/profile.d/qt.sh
@@ -47,6 +43,10 @@ else
 fi
 if ! which qmake >/dev/null 2>&1; then
     echo "qmake missing!" >&2
+    if which qt5-qmake; then
+        export QMAKE=$(which qt5-qmake)
+        alias qmake=$QMAKE
+    fi
 fi
 echo -n "= "
 which qmake || exit $?
