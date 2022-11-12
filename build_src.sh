@@ -7,11 +7,11 @@
 echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
 env
-if [[ -z "$GITHUB_WORKSPACE" ]]; then
+if [[ -z "$workspace" ]]; then
     echo "workspace directory not defined, skipping build" >&2
     exit 1
 fi
-cd "$GITHUB_WORKSPACE" || exit $?
+cd "$workspace" || exit $?
 
 # Pipeline build parameters
 if [ -n "$INPUT_RECIPE" ]; then
