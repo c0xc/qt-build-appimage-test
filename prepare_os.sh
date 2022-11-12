@@ -32,6 +32,11 @@ fi
 if [ -n "$NO_QT_BUILD" ]; then
     QT_DEV=
 fi
+if [ -n "$QT_DEV" ]; then
+    echo "QT_DEV = true (Qt build enabled)"
+else
+    echo "QT_DEV = false (Qt build disabled)"
+fi
 
 if [ "$OS_NAME" = "debian/eol" ]; then
     # jessie = 8
