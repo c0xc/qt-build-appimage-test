@@ -9,12 +9,13 @@ echo "BUILD PIPELINE - OS PREPARATION..."
 # Pipeline build parameters are unavailable here
 OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d'=')
 if [ -z "$OS_NAME"]; then
+    # lower case args used in Dockerfile
     OS_NAME=$os_name
 fi
 if [ -z "$OS_NAME" ]; then
     echo "error: OS_NAME not set"
 fi
-echo "OS: $OS_NAME:$OS_RELEASE"
+echo "OS: $OS_NAME"
 if [ -z "$OS_NAME" ]; then
     OS_ID=$(cat /etc/os-release | grep ^ID | cut -f2 -d'=')
     OS_NAME=$OS_ID
