@@ -7,6 +7,8 @@
 echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
 env
+ls -la /
+mount
 if [[ -z "$workspace" ]]; then
     ls -la /workspace
     if [[ -d "/workspace" ]]; then
