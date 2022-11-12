@@ -7,7 +7,6 @@
 
 if [[ -z "$GITHUB_WORKSPACE" ]]; then
     echo "workspace directory not defined, skipping build" >&2
-    exit
     exit 1
 fi
 cd "$GITHUB_WORKSPACE" || exit $?
