@@ -149,6 +149,8 @@ elif [ "$OS_NAME" = "fedora" ]; then
         # Build essentials
         yum install -y \
         perl-version git gcc-c++ compat-openssl10-devel harfbuzz-devel double-conversion-devel libzstd-devel at-spi2-atk-devel dbus-devel mesa-libGL-devel
+        yum install -y \
+        wget curl which
 
         # Libxcb
         yum install -y \
@@ -168,7 +170,9 @@ elif [ "$OS_NAME" = "fedora" ]; then
 
     else
         yum install -y perl python3 git g++
+        yum install -y wget curl which
         yum install -y qt5-qtbase qt5-linguist
+        yum install -y qt5-qtbase-devel
     fi
 
 else
