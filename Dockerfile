@@ -30,6 +30,5 @@ COPY build*.sh qt-everywhere-src-*.tar.* *.AppImage /var/tmp/
 RUN /var/tmp/build_qt5.sh
 
 # Arguments, application build script
-ARG GITHUB_WORKSPACE
-ENV GITHUB_WORKSPACE $GITHUB_WORKSPACE
+ENV workspace $workspace
 ENTRYPOINT ["/var/tmp/build_src.sh"]
