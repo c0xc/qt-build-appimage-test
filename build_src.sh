@@ -8,8 +8,12 @@ echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
 env
 if [[ -z "$workspace" ]]; then
-    echo "workspace directory not defined, skipping build" >&2
-    exit 1
+    if [[ -d "/workspace" ]]; then
+        workspace="/workspace"
+    else    
+        echo "workspace directory not defined, skipping build" >&2
+        exit 1
+    fi
 fi
 cd "$workspace" || exit $?
 
