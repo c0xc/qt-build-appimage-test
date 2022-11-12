@@ -4,9 +4,9 @@
 # -*- sh-basic-offset: 4 -*-
 #
 # GITHUB BUILD PIPELINE - OS PREPARATION
+echo "BUILD PIPELINE - OS PREPARATION..."
 
 # Pipeline build parameters are unavailable here
-echo "BUILD PIPELINE - OS PREPARATION..."
 OS_VERSION_ID=$(cat /etc/os-release 2>/dev/null | grep ^VERSION_ID= | cut -f2 -d'=')
 if [ -z "$OS_NAME"]; then
     OS_NAME=$os_name
