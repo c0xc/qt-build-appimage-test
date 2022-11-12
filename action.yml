@@ -33,7 +33,7 @@ runs:
       shell: bash
     - run: docker --version
       shell: bash
-    - run: cd ${{ github.action_path }} && docker build -t build-container --build-arg os_name=${{ inputs.os_name }} --build-arg os_release=${{ inputs.os_release }} --build-arg no_qt_build=${{ inputs.no_qt_build }} .
+    - run: cd ${{ github.action_path }} && docker build -t build-container --build-arg os_name=${{ inputs.os_name }} --build-arg os_release=${{ inputs.os_release }} --build-arg no_qt_build=${{ inputs.no_qt_build }} --build-arg GITHUB_WORKSPACE=${{ github.workspace }} .
       shell: bash
     - run: cd ${{ github.action_path }} && docker run -t build-container -v ${{ github.workspace }}:/workspace 
       shell: bash
