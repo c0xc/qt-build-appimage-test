@@ -8,6 +8,7 @@ echo "BUILD PIPELINE - APPLICATION BUILD SCRIPT..."
 
 env
 if [[ -z "$workspace" ]]; then
+    ls -la /workspace
     if [[ -d "/workspace" ]]; then
         workspace="/workspace"
     else    
