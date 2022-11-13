@@ -49,7 +49,7 @@ if ! which qmake >/dev/null 2>&1; then
     fi
 fi
 echo -n "= "
-which qmake || exit $?
+type qmake || exit $?
 echo
 
 # Prepare linuxdeploy tool for creating AppImage
