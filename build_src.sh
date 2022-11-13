@@ -48,6 +48,7 @@ if ! which qmake >/dev/null 2>&1; then
         echo "found: $QMAKE"
         export QMAKE
         alias qmake=$QMAKE
+        type qmake
     fi
 fi
 echo -n "= "
