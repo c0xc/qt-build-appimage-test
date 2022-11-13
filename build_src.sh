@@ -43,8 +43,10 @@ else
 fi
 if ! which qmake >/dev/null 2>&1; then
     echo "qmake missing!" >&2
-    if which qmake-qt5; then
-        export QMAKE=$(which qmake-qt5)
+    if which qmake-qt5 2>/dev/null; then
+        QMAKE=$(which qmake-qt5)
+        echo "found: $QMAKE"
+        export QMAKE
         alias qmake=$QMAKE
     fi
 fi
