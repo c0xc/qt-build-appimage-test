@@ -167,6 +167,8 @@ elif [ "$OS_NAME" = "fedora" ]; then
         # WebEngine
         yum install -y \
         freetype-devel fontconfig-devel pciutils-devel nss-devel nspr-devel ninja-build gperf cups-devel pulseaudio-libs-devel libcap-devel alsa-lib-devel bison libXrandr-devel libXcomposite-devel libXcursor-devel libXtst-devel dbus-devel fontconfig-devel alsa-lib-devel rh-nodejs12-nodejs rh-nodejs12-nodejs-devel
+        
+        # dnf builddep dolphin
 
     else
         yum install -y perl python3 git g++
