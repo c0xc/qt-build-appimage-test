@@ -41,18 +41,22 @@ if [ -n "$QTDIR" ]; then
 else
     echo "QTDIR not defined, using Qt installation from distribution" >&2
 fi
+QMAKe=qmake
 if ! which qmake >/dev/null 2>&1; then
-    echo "qmake missing!" >&2
     if which qmake-qt5 2>/dev/null; then
         QMAKE=$(which qmake-qt5)
         echo "found: $QMAKE"
+        alias qmake="$QMAKE"
         export QMAKE
-        alias qmake=$QMAKE
+        echo -n "test: "
         type qmake
+    else
+        echo "qmake missing!" >&2
     fi
 fi
 echo -n "= "
-type qmake || exit $?
+echo $QMAKE
+type qmake || exit $? # fails
 echo
 
 # Prepare linuxdeploy tool for creating AppImage
